@@ -1,0 +1,99 @@
+
+
+npm install
+npm run dev
+
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function Home() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Form submitted. You can wire this to an email service like Formspree or use a backend.");
+  };
+
+  return (
+    <main className="min-h-screen bg-white text-black p-8 space-y-16">
+      {/* Hero Section */}
+      <section className="text-center space-y-4">
+        <h1 className="text-4xl font-bold text-red-700">Jeremy Mattingly Design LLC</h1>
+        <p className="text-lg">Architectural Design Solutions Tailored to You</p>
+      </section>
+
+      {/* About Section */}
+      <section className="max-w-3xl mx-auto text-center space-y-2">
+        <h2 className="text-2xl font-semibold">About Us</h2>
+        <p>
+          We specialize in modern architectural design, helping clients bring their
+          vision to life through innovative planning, 3D modeling, and detailed project execution.
+        </p>
+      </section>
+
+      {/* Portfolio Section */}
+      <section className="max-w-5xl mx-auto">
+        <h2 className="text-2xl font-semibold text-center mb-6">Portfolio</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((item) => (
+            <Card key={item} className="overflow-hidden">
+              <img
+                src={`https://via.placeholder.com/400x300?text=Project+${item}`}
+                alt={`Project ${item}`}
+                className="w-full h-48 object-cover"
+              />
+              <CardContent className="p-4">
+                <p className="text-sm">Project {item} description goes here.</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="max-w-xl mx-auto space-y-6">
+        <h2 className="text-2xl font-semibold text-center">Request a Consultation</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={form.name}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            value={form.message}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          ></textarea>
+          <Button type="submit" className="w-full bg-red-700 hover:bg-red-800 text-white">
+            Submit
+          </Button>
+        </form>
+        <div className="text-center">
+          <p>Email: contact@jeremymattinglydesignllc.com</p>
+          <p>Phone: (123) 456-7890</p>
+        </div>
+      </section>
+    </main>
+  );
+}
